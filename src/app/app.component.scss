@@ -1,0 +1,197 @@
+.App {
+  height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+
+  &:before {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+
+    content: '';
+    background: url('../assets/img/App/main__background.jpg') center center;
+    background-size: cover;
+    z-index: -1;
+    filter: blur(1rem);
+  }
+  &__sidebar {
+    width: 25%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    background-color: rgba(255, 255, 255, .75);
+    backdrop-filter: blur(1rem);
+    @media screen and (min-width: 480px) {}
+    @media screen and (min-width: 768px) {}
+    @media screen and (min-width: 992px) {}
+    @media screen and (min-width: 1200px) {}
+    @media screen and (min-width: 1400px) {
+      width: 21.75%;
+    }
+    &--collapsed {
+      width: auto;
+    }
+    &-logo {
+      position: relative;
+      display: block;
+      padding: 1.25rem;
+      margin: 0 0 1.25rem;
+
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1;
+      color: rgba(0, 0, 0, .675);
+
+      &:hover {
+        color: rgba(0, 123, 255, .675);
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: calc(100% - 2.5rem);
+        background: rgba(0, 0, 0, .75);
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    &-nav {
+      flex-grow: 1;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: calc(100% - 2.5rem);
+        background: rgba(0, 0, 0, .75);
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &-list {
+        padding: 0;
+        margin: 0;
+
+        list-style-type: none;
+      }
+      &-item {
+        display: block;
+
+        &:before,
+        &:after {
+          height: 1px;
+          width: 100%;
+          display: block;
+
+          content: '';
+          background: transparent;
+          transition: background .2s;
+        }
+        &:hover {
+          &:before,
+          &:after {
+            background: linear-gradient(
+              to right,
+              rgba(255, 255, 255, .0),
+              rgba(255, 255, 255, .675) 75%,
+              rgba(255, 255, 255, .0)
+            );
+          }
+        }
+      }
+      &-link {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 2rem auto;
+        grid-template-areas: "icon title";
+        padding: .75rem 1.25rem .75rem 1rem;
+        border: none;
+        border-left: .25rem solid transparent;
+        position: relative;
+
+        background: transparent;
+        text-decoration: none;
+        font-weight: 300;
+        font-size: 1rem;
+        line-height: 1;
+        color: rgba(0, 0, 0, 1);
+        text-align: left;
+
+        transition: background .2s;
+        will-change: background;
+
+        &:hover {
+          border-color: rgba(255, 255, 255, .375);
+          background: radial-gradient(
+            circle at 75%,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .0625)
+          );
+        }
+        &--collapsed {
+          grid-template-columns: 100%;
+          grid-template-areas: "icon";
+          align-items: center;
+          justify-items: center;
+        }
+        &--active {
+          border-color: rgba(255, 255, 255, .675);
+        }
+      }
+      &-icon {
+        grid-area: icon;
+        display: block;
+        text-align: center;
+      }
+      &-title {
+        grid-area: title;
+      }
+    }
+
+    &-profile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem;
+    }
+
+    &-logout {
+      padding: 0;
+      border: none;
+      margin: 0 0 0 .5rem;
+
+      background: transparent;
+      font-size: .75rem;
+      cursor: pointer;
+      &:hover {
+        color: rgba(0, 123, 255, .675);
+      }
+    }
+  }
+
+  &__main {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-grow: 1;
+
+    background-color: rgba(0, 0, 0, .7);
+    backdrop-filter: blur(1rem);
+    color: rgba(255, 255, 255, 1);
+  }
+}

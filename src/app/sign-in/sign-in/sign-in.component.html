@@ -1,0 +1,20 @@
+<h1 class="page__heading">
+  Sign in
+</h1>
+<form class="form--vertical" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+  <div class="form__group--vertical">
+      <div class="field">
+        <label class="field_label sr-only" for="email">Email</label>
+        <div class="field__input-wrapper">
+          <input class="field__input" id="email" placeholder="Email" type="email" formControlName="email">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field_label sr-only" for="password">Password</label>
+        <div class="field__input-wrapper">
+          <input class="field__input" id="password" placeholder="Password" type="password" formControlName="password">
+        </div>
+      </div>
+  </div>
+  <button class="button button--primary" type="submit" [disabled]="!this.signInForm.valid">Sign in</button>
+</form>

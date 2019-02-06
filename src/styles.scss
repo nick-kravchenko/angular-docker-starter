@@ -1,0 +1,57 @@
+@import "assets/scss/_normalize.scss";
+@import "assets/scss/page";
+@import "assets/scss/screen-reader";
+@import "assets/scss/form";
+@import "assets/scss/field";
+@import "assets/scss/button";
+@import "assets/scss/colors";
+
+html {
+    font-family: Sagoe UI, sans-serif;
+}
+body {
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 1rem;
+}
+p {
+    margin: 0 0 1rem;
+
+    font-size: 1rem;
+    line-height: 1.5;
+}
+* {
+    box-sizing: border-box;
+    font-size: 4vw;
+}
+@media screen and (min-width: 480px), screen and (min-height: 480px) {
+    * {
+        font-size: 4vw;
+    }
+}
+@media screen and (min-width: 768px), screen and (min-height: 768px) {
+    * {
+        font-size: 1.75vw;
+    }
+}
+@media screen and (min-width: 992px), screen and (min-height: 992px) {
+    * {
+        font-size: 1.75vw;
+    }
+}
+@media screen and (min-width: 1200px), screen and (min-height: 1200px) {
+    * {
+        font-size: 1.75vw;
+    }
+}
+@media screen and (min-width: 1400px), screen and (min-height: 1400px) {
+    * {
+        font-size: 1vw;
+    }
+}
+@font-face {
+    font-family: 'Sagoe UI';
+    font-style: normal;
+    src: url('./assets/fonts/SagoeUI.ttf');
+}

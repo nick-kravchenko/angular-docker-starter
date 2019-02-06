@@ -1,0 +1,48 @@
+.field {
+    display: flex;
+    align-items: center;
+    margin: 0 0 1rem;
+    &:last-child {
+        margin: 0;
+    }
+    &--horizontal {
+        @extend .field;
+        flex-direction: row;
+    }
+    &--vertical {
+        @extend .field;
+        flex-direction: column;
+    }
+    &__label {
+        font-size: 13px;
+        display: inline-block;
+        margin-top: 21px;
+        padding-bottom: 7px;
+        line-height: 20px;
+    }
+    &__input-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    &__append {
+        min-width: 2rem;
+        height: 100%;
+    }
+    &__input {
+        max-width: 100%;
+        width: 24rem;
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid rgba(0,0,0,.6);
+        outline: 2px solid transparent;
+        background: #fff;
+
+        &:focus {
+            outline-color: #000;
+        }
+    }
+    &__prepend {
+
+    }
+}

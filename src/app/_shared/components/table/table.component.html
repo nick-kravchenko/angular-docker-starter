@@ -1,0 +1,21 @@
+<section class="Table__wrapper">
+  <table class="Table">
+    <thead class="Table__head">
+    <tr class="Table__head-row">
+      <th *ngFor="let k of keys" class="Table__head-col">
+        <button (click)="sortValues(k.key)" class="Table__sort">
+          <span class="Table__sort-title">{{k.title}}</span>
+          <fa-icon *ngIf="sort === k.key" [icon]="dir === 'asc' ? faAngleDown : faAngleUp" class="Table__sort-icon"></fa-icon>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tbody class="Table__body">
+    <tr *ngFor="let row of sortedValues()" class="Table__body-row">
+      <td *ngFor="let k of keys" class="Table__body-col">
+        {{getValue(row, k)}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>

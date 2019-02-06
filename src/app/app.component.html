@@ -1,0 +1,33 @@
+<section class="App">
+  <aside [ngClass]="{'App__sidebar': true, 'App__sidebar--collapsed': collapse}">
+    <a routerLink="/" class="App__sidebar-logo">NG</a>
+    <nav class="App__sidebar-nav">
+      <ul class="App__sidebar-nav-list">
+        <li class="App__sidebar-nav-item">
+          <button type="button"
+                  [ngClass]="{'App__sidebar-nav-link': true, 'App__sidebar-nav-link--collapsed': collapse}"
+                  (click)="toggleCollapse()">
+            <fa-icon [icon]="faBars" class="App__sidebar-nav-icon"></fa-icon>
+          </button>
+        </li>
+        <li class="App__sidebar-nav-item" *ngFor="let navItem of getNavItems()">
+          <a routerLink="{{navItem.path}}"
+             routerLinkActive="App__sidebar-nav-link--active"
+             [ngClass]="{'App__sidebar-nav-link': true, 'App__sidebar-nav-link--collapsed': collapse}">
+            <fa-icon [icon]="navItem.icon" class="App__sidebar-nav-icon"></fa-icon>
+            <span *ngIf="!collapse" class="App__sidebar-nav-title">{{navItem.title}}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="App__sidebar-profile">
+      <div *ngIf="!collapse" class="App__sidebar-email">{{getEmail()}}</div>
+      <button *ngIf="userService.isLoggedIn()" type="button" class="App__sidebar-logout" (click)="logout()">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>
+      </button>
+    </div>
+  </aside>
+  <main class="App__main">
+    <router-outlet></router-outlet>
+  </main>
+</section>

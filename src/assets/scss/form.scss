@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    &--horizontal {
+        @extend .form;
+        flex-direction: row;
+    }
+    &--vertical {
+        @extend .form;
+        flex-direction: column;
+    }
+
+    &__group {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 0 1rem;
+        &:last-child {
+            margin: 0;
+        }
+        &--horizontal {
+            @extend .form__group;
+            flex-direction: row;
+        }
+        &--vertical {
+            @extend .form__group;
+            flex-direction: column;
+        }  
+    }
+}
