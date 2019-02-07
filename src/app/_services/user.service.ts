@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../_typings/user';
+import { LocalStorageService } from './local-storage.service';
 
 const backend = 'http://localhost:3333';
 
@@ -17,12 +18,13 @@ export class UserService {
   };
   init: Function = () => {
     if (typeof window !== 'undefined') {
-      this.jwt = window.localStorage.getItem('jwt') || null;
+      this.jwt = this.localStorage.get('jwt') || null;
       if (this.isLoggedIn()) this.loadUser();
     }
   };
   constructor(
     private http: HttpClient,
+    private localStorage: LocalStorageService,
   ) {}
   loadUser() {
     this.http.get<User>(`${backend}/auth/me`).subscribe(
@@ -38,10 +40,8 @@ export class UserService {
     return this.http.post(`${backend}/auth/login`, credentials).subscribe(
       (response: any) => {
         this.jwt = response.token;
-        if (typeof window !== 'undefined') {
-          window.localStorage.setItem('jwt', this.jwt);
-          this.loadUser();
-        }
+        this.localStorage.set('jwt', this.jwt);
+        this.loadUser();
       },
       (error) => {
         // this.router.navigate(['/sign-up/success']);
@@ -66,11 +66,9 @@ export class UserService {
   }
   logout() {
     return new Promise((resolve, reject) => {
-      if (typeof window !== 'undefined') {
-        window.localStorage.removeItem('jwt');
-        this.data = undefined;
-        this.jwt = null;
-      }
+      this.localStorage.remove('jwt');
+      this.data = undefined;
+      this.jwt = null;
     });
   }
 }

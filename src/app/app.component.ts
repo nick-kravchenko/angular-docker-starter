@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from './_services/user.service';
 import { faSignOutAlt, faLanguage, faUser, faUsers, faSignInAlt, faUserPlus, faLock, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { LocalStorageService } from './_services/local-storage.service';
 
 @Component({
     selector: 'app-root',
@@ -9,9 +10,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  collapse = typeof window !== 'undefined' && window.localStorage && localStorage.getItem('sidebar.collapse')
-    ? localStorage.getItem('sidebar.collapse') === 'true'
-    : false;
+  collapse:boolean = false;
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
   faLanguage = faLanguage;
@@ -52,14 +51,13 @@ export class AppComponent {
   constructor (
     public userService: UserService,
     public router: Router,
+    public localStorage: LocalStorageService,
   ) {
-
+    this.collapse = this.localStorage.get('sidebar.collapse') === 'true';
   }
 
   toggleCollapse() {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem('sidebar.collapse', `${!this.collapse}`);
-    }
+    this.localStorage.set('sidebar.collapse', `${!this.collapse}`);
     this.collapse = !this.collapse;
   }
 
