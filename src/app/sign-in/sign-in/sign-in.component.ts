@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../_services/user.service';
+import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
   signInForm: FormGroup;
   constructor(
-    private user: UserService,
+    private user: AuthService,
     private router: Router
   ) {}
 

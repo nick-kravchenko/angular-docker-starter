@@ -7,14 +7,14 @@ import {
     HttpResponse,
     HttpErrorResponse
 } from "@angular/common/http";
-import { UserService } from "../_services/user.service";
+import { AuthService } from "../_services/auth.service";
 import { Observable } from "rxjs";
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private user: UserService) {}
+  constructor(private user: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Get the auth token from the service.

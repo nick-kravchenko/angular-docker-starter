@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from './_services/user.service';
+import { AuthService } from './_services/auth.service';
 import { faSignOutAlt, faLanguage, faUser, faUsers, faSignInAlt, faUserPlus, faLock, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LocalStorageService } from './_services/local-storage.service';
@@ -49,7 +49,7 @@ export class AppComponent {
     },
   ];
   constructor (
-    public userService: UserService,
+    public userService: AuthService,
     public router: Router,
     public localStorage: LocalStorageService,
   ) {

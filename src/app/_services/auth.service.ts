@@ -8,7 +8,7 @@ const backend = 'http://localhost:3333';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
   jwt: string|null = null;
   data: User = {
     id: 0,

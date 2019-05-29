@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../_services/user.service';
+import { AuthService } from '../../_services/auth.service';
 import { matchPasswords } from '../../_directives/matchPasswords.directive';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   constructor(
-    private user: UserService,
+    private user: AuthService,
     private router: Router
   ) {}
 

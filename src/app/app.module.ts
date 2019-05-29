@@ -6,7 +6,7 @@ import { SharedModule } from './_shared/_shared.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AboutComponent } from './about/about.component';
-import { UserService } from './_services/user.service';
+import { AuthService } from './_services/auth.service';
 import { AuthInterceptor } from './_interceptors/auth-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -29,8 +29,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: (us: UserService) => function() { return us.init(); },
-      deps: [ UserService ],
+      useFactory: (us: AuthService) => function() { return us.init(); },
+      deps: [ AuthService ],
       multi: true
     }
   ],
