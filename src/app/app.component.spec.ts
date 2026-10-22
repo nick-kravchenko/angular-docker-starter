@@ -1,18 +1,18 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { AppModule } from './app.module';
+import { TestBed } from '@angular/core/testing';
+import { } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+      imports: [AppModule],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -20,16 +20,20 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-docker-starter'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-docker-starter');
-  });
-
-  it('should render title in a h1 tag', () => {
+  it('should show unauthorized navigation when logged out', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-docker-starter!');
+    const titles = Array.from<HTMLElement>(
+      fixture.nativeElement.querySelectorAll('.App__sidebar-nav-title'),
+    ).map((el) => el.textContent?.trim());
+    expect(titles).toEqual(['Sign In', 'Sign up', 'Restore password']);
+  });
+
+  it('should toggle sidebar collapse', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const initial = app.collapse;
+    app.toggleCollapse();
+    expect(app.collapse).toBe(!initial);
   });
 });
