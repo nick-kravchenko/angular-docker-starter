@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-sign-up-success',
   templateUrl: './sign-up-success.component.html',
   styleUrls: ['./sign-up-success.component.scss']

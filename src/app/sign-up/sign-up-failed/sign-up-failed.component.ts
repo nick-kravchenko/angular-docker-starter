@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-sign-up-failed',
   templateUrl: './sign-up-failed.component.html',
   styleUrls: ['./sign-up-failed.component.scss']

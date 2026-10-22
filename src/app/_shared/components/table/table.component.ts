@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
+  standalone: false,
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
@@ -15,7 +16,7 @@ export class TableComponent implements OnInit {
   sort = 'id';
   dir = 'asc';
 
-  @Input() keys: [];
+  @Input() keys: any[];
   @Input() values = [];
 
   constructor() { }

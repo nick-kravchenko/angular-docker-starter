@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, APP_ID, provideZoneChangeDetection } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './_shared/_shared.module';
 
@@ -17,11 +17,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AboutComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({appId: 'angular-docker-starter'}),
+    BrowserModule,
     SharedModule,
     AppRoutingModule,
   ],
   providers: [
+    provideZoneChangeDetection(),
+    { provide: APP_ID, useValue: 'angular-docker-starter' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

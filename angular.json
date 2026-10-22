@@ -1,27 +1,43 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:application": {
+      "testRunner": "karma"
+    },
+    "@schematics/angular:library": {
+      "testRunner": "karma"
+    }
+  },
   "projects": {
     "angular-docker-starter": {
-      "root": "",
-      "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
       },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/browser",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -29,111 +45,69 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": [
+                "localhost"
+              ]
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            },
+            "polyfills": [
+              "zone.js"
+            ]
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "angular-docker-starter:build"
-          },
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-docker-starter:build:production"
+              "buildTarget": "angular-docker-starter:build:production"
+            },
+            "development": {
+              "buildTarget": "angular-docker-starter:build:development"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "angular-docker-starter:build"
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/server",
-            "main": "src/main.server.ts",
-            "tsConfig": "src/tsconfig.server.json"
-          }
-        }
-      }
-    },
-    "angular-docker-starter-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-docker-starter:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "angular-docker-starter:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "runner": "karma"
           }
         }
       }
     }
-  },
-  "defaultProject": "angular-docker-starter"
+  }
 }

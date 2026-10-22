@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-restore-password-failed',
   templateUrl: './restore-password-failed.component.html',
   styleUrls: ['./restore-password-failed.component.scss']

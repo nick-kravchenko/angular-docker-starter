@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from './_services/local-storage.service';
 
 @Component({
+    standalone: false,
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']

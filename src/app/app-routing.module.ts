@@ -16,22 +16,22 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: './sign-in/sign-in.module#SignInModule',
+    loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule),
     canActivate: [UnauthGuard]
   },
   {
     path: 'sign-up',
-    loadChildren: './sign-up/sign-up.module#SignUpModule',
+    loadChildren: () => import('./sign-up/sign-up.module').then(m => m.SignUpModule),
     canActivate: [UnauthGuard]
   },
   {
     path: 'restore-password',
-    loadChildren: './restore-password/restore-password.module#RestorePasswordModule',
+    loadChildren: () => import('./restore-password/restore-password.module').then(m => m.RestorePasswordModule),
     canActivate: [UnauthGuard]
   },
   {
     path: 'user',
-    loadChildren: './user/user.module#UserModule',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     canActivate: [AuthGuard]
   },
   {

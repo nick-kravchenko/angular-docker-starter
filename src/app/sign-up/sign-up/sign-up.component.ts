@@ -5,6 +5,7 @@ import { matchPasswords } from '../../_directives/matchPasswords.directive';
 import { Router } from '@angular/router';
 
 @Component({
+  standalone: false,
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
